@@ -59,5 +59,7 @@ const validateUserParameters= async (user)=>{
 }
 
 
+
+
 export default User;
 export {validateUserParameters};
