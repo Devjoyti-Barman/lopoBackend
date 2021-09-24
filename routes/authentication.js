@@ -3,6 +3,7 @@ import express from "express";
 import { signupUser } from "../controllers/authentication/signupUser.js";
 import { signinUser } from "../controllers/authentication/signinUser.js";
 import authorization from "../moddlewares/requireLogin.js";
+
 const router=express.Router();
 
 router.route("/product").get(authorization,(req,res)=>{

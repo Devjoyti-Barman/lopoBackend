@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import connectDB from "./connections/db.js";
 import authenticationRouter from './routes/authentication.js'
+import postRouter from './routes/post.js';
 
 dotenv.config();
 
@@ -10,6 +11,7 @@ const app=express();
 
 app.use(express.json());
 
+app.use("/create-post",postRouter);
 app.use('/',authenticationRouter);
 
 connectDB();
