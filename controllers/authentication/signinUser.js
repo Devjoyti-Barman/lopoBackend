@@ -45,7 +45,7 @@ const signinUser=async (req,res)=>{
         const user=await User.findOne({email:email});
 
         if( !user ){
-            return res.status(404).send('Invalid Email or Paassword');
+            return res.status(404).send({error:'Invalid Email or Paassword'});
         }else{
              
             const isMatch=await bcrypt.compare(password,user.password);
@@ -53,7 +53,8 @@ const signinUser=async (req,res)=>{
             if(isMatch){
 
                 const jwtToken=jwt.sign({_id:user._id},jwtPrivateKey);
-                return res.json({token:jwtToken});
+                user.password=undefined;
+                return res.json({token:jwtToken,user:user});
                 
             }else
                 return res.status(401).send('Invalid Email or Password');

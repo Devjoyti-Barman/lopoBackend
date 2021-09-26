@@ -11,7 +11,7 @@ const signupUser=async (req,res)=>{
         
         const error=await validateUserParameters({name,email,password,confirm_password});
 
-        if(error) return res.status(400).json(error);
+        if(error) return res.status(400).json({error:error});
               
         const isUserExist=await User.findOne({email:email});
         
@@ -30,7 +30,7 @@ const signupUser=async (req,res)=>{
             return res.json({message:"successfully user is created"});
             
         } else{
-            return res.json({message:"user is already existed."});
+            return res.status(400).json({error:"user is already existed."});
         }
     
 
